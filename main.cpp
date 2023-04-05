@@ -2,10 +2,12 @@
 
 #include <QApplication>
 
+QApplication *app;
+
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    app = new QApplication(argc, argv);
     haluo w;
     w.show();
-    return a.exec();
+    return app->exec();
 }

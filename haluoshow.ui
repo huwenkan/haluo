@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>haluo</class>
- <widget class="QWidget" name="haluo">
+ <class>HaluoShow</class>
+ <widget class="QWidget" name="HaluoShow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>399</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
-   <string>haluo</string>
+   <string>Form</string>
   </property>
  </widget>
  <resources/>

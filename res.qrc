@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/">
+        <file>haluo_touch/demo01.png</file>
+        <file>haluo_touch/demo02.png</file>
+        <file>haluo_touch/demo03.png</file>
+        <file>haluo_touch/demo04.png</file>
+        <file>haluo_touch/demo05.png</file>
+        <file>haluo_touch/demo06.png</file>
+        <file>haluo_touch/demo07.png</file>
+        <file>haluo_touch/demo08.png</file>
+        <file>haluo_static/demo01.png</file>
+        <file>haluo_static/demo02.png</file>
+        <file>haluo_static/demo03.png</file>
+        <file>haluo_static/demo04.png</file>
+        <file>haluo_static/demo05.png</file>
+        <file>haluo_static/demo06.png</file>
+        <file>haluo_static/demo07.png</file>
+        <file>haluo_static/demo08.png</file>
+        <file>haluo_index/1.png</file>
+        <file>haluo_index/2.png</file>
+        <file>haluo_index/3.png</file>
+        <file>haluo_index/4.png</file>
+        <file>haluo_index/5.png</file>
+        <file>haluo_index/6.png</file>
+        <file>haluo_index/demo01.png</file>
+        <file>haluo_index/demo02.png</file>
+        <file>haluo_index/demo03.png</file>
+        <file>haluo_index/demo04.png</file>
+        <file>haluo_index/demo05.png</file>
+        <file>haluo_index/demo06.png</file>
+        <file>haluo_index/demo07.png</file>
+        <file>haluo_index/demo08.png</file>
+    </qresource>
+</RCC>

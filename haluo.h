@@ -1,11 +1,18 @@
 #ifndef HALUO_H
 #define HALUO_H
 
+#include "haluoshow.h"
+#include "menuwidget.h"
+
 #include <QWidget>
+#include <QMouseEvent>
+#include <QApplication>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class haluo; }
 QT_END_NAMESPACE
+
+extern QApplication *app;
 
 class haluo : public QWidget
 {
@@ -21,5 +28,10 @@ public:
 
 private:
     Ui::haluo *ui;
+    QPoint dragPosition;
+    HaluoShow *haluoShow;
+    bool childWidgetFlag = false;
+    MenuWidget *menuWidget=nullptr;
+
 };
 #endif // HALUO_H
