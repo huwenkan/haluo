@@ -8,6 +8,9 @@
 #include <QMouseEvent>
 #include <QApplication>
 
+//用于全局访问来更改状态
+extern HaluoShow *haluoShow;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class haluo; }
 QT_END_NAMESPACE
@@ -29,9 +32,8 @@ public:
 private:
     Ui::haluo *ui;
     QPoint dragPosition;
-    HaluoShow *haluoShow;
     bool childWidgetFlag = false;
-    MenuWidget *menuWidget=nullptr;
+    MenuWidget *menuWidget = nullptr;
 
 };
 #endif // HALUO_H

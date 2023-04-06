@@ -4,6 +4,10 @@
 #include "haluoshowlabel.h"
 
 #include <QWidget>
+#include <QPushButton>
+
+//label标签用于全局访问来更改状态
+extern HaluoShowLabel *haluoShwoLabel;
 
 namespace Ui {
 class HaluoShow;
@@ -16,10 +20,11 @@ class HaluoShow : public QWidget
 public:
     explicit HaluoShow(QWidget *parent = nullptr);
     ~HaluoShow();
+    QWidget *skinWidget;
+    QLabel *skinLabel;
 
 private:
     Ui::HaluoShow *ui;
-    HaluoShowLabel *haluoShwoLabel;
 };
 
 #endif // HALUOSHOW_H

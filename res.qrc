@@ -16,19 +16,21 @@
         <file>haluo_static/demo06.png</file>
         <file>haluo_static/demo07.png</file>
         <file>haluo_static/demo08.png</file>
-        <file>haluo_index/1.png</file>
-        <file>haluo_index/2.png</file>
-        <file>haluo_index/3.png</file>
-        <file>haluo_index/4.png</file>
-        <file>haluo_index/5.png</file>
-        <file>haluo_index/6.png</file>
-        <file>haluo_index/demo01.png</file>
-        <file>haluo_index/demo02.png</file>
-        <file>haluo_index/demo03.png</file>
-        <file>haluo_index/demo04.png</file>
-        <file>haluo_index/demo05.png</file>
-        <file>haluo_index/demo06.png</file>
-        <file>haluo_index/demo07.png</file>
-        <file>haluo_index/demo08.png</file>
+        <file>haluo_static_black/demo1.png</file>
+        <file>haluo_static_black/demo2.png</file>
+        <file>haluo_static_black/demo3.png</file>
+        <file>haluo_static_black/demo4.png</file>
+        <file>haluo_static_black/demo5.png</file>
+        <file>haluo_static_black/demo6.png</file>
+        <file>haluo_static_black/demo7.png</file>
+        <file>haluo_static_black/demo8.png</file>
+        <file>haluo_touch_black/demo1.png</file>
+        <file>haluo_touch_black/demo2.png</file>
+        <file>haluo_touch_black/demo3.png</file>
+        <file>haluo_touch_black/demo4.png</file>
+        <file>haluo_touch_black/demo5.png</file>
+        <file>haluo_touch_black/demo6.png</file>
+        <file>haluo_touch_black/demo7.png</file>
+        <file>haluo_touch_black/demo8.png</file>
     </qresource>
 </RCC>

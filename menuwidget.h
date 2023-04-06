@@ -2,6 +2,7 @@
 #define MENUWIDGET_H
 
 #include "haluo.h"
+#include "haluoshowlabel.h"
 
 #include <QWidget>
 #include <QPushButton>

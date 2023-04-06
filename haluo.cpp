@@ -1,16 +1,21 @@
 #include "haluo.h"
 #include "ui_haluo.h"
 
+HaluoShow *haluoShow;
+
 haluo::haluo(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::haluo)
 {
     ui->setupUi(this);
+    resize(800,800);
     //设置无边框
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     haluoShow = new HaluoShow(this);
-    resize(800,800);
+    //设置菜单窗口,默认关闭
+    menuWidget = new MenuWidget(this);
+    menuWidget->close();
 }
 
 haluo::~haluo()
@@ -26,7 +31,6 @@ void haluo::mousePressEvent(QMouseEvent *event)
        event->accept();
    }
 }
-
 void haluo::mouseMoveEvent(QMouseEvent *event)
 {
     //判断菜单窗口未打开
@@ -35,7 +39,6 @@ void haluo::mouseMoveEvent(QMouseEvent *event)
         event->accept();
     }
 }
-
 void haluo::mouseReleaseEvent(QMouseEvent *event)
 {
     //判断菜单窗口未打开
@@ -49,14 +52,7 @@ void haluo::mouseDoubleClickEvent(QMouseEvent *event)
 {
     // 弹出另一个QWidget
     if(!childWidgetFlag){
-        if(menuWidget == nullptr)
-        {
-            menuWidget = new MenuWidget(this);
-        }
-        else
-        {
-            menuWidget->show();
-        }
+         menuWidget->show();
          childWidgetFlag = true;
     }else {
          childWidgetFlag = false;
