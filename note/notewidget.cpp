@@ -4,7 +4,7 @@
 
 NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
 {
-    setGeometry(400,0,200,200);
+    setGeometry(450,0,200,200);
     //记事本列表
     listWidget = new QListWidget(this);
     QPushButton *openButton = new QPushButton("打开", this);
@@ -16,7 +16,6 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     layout->addWidget(addButton);
     layout->addWidget(deleteButton);
     setLayout(layout);
-    setGeometry(400,0,150,200);
 
     QDir dir(notePath);
     QStringList filters;

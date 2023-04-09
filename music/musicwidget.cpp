@@ -6,6 +6,7 @@
 //音乐播放窗口模块
 MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
 {
+    setGeometry(450,0,200,200);
     //设置音乐窗口
     listWidget = new QListWidget(this);
 
@@ -62,7 +63,6 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     layout->addWidget(addButton);
     layout->addWidget(deleteButton);
     setLayout(layout);
-    setGeometry(400,0,150,200);
 
    //设置音乐播放器
     player = new QMediaPlayer(listWidget);
@@ -78,7 +78,6 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
             player->pause();
             playerFlag = false;
         }
-
     });
     //默认关闭
     close();

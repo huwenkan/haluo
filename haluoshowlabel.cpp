@@ -1,5 +1,6 @@
 #include "haluoshowlabel.h"
 
+//显示haluo
 HaluoShowLabel::HaluoShowLabel(QWidget *parent) : QLabel(parent)
 {
     //初始化动态切换图片
@@ -66,7 +67,7 @@ HaluoShowLabel::HaluoShowLabel(QWidget *parent) : QLabel(parent)
         this->setPixmap(*touchShowPixmap[haluoTouchNum++]);
     });
 
-    setGeometry(200,0,haluoStaticPixmap[0]->width(),haluoStaticPixmap[0]->height());
+    setGeometry(250,0,haluoStaticPixmap[0]->width(),haluoStaticPixmap[0]->height());
 }
 //鼠标进入后切换动作
 void HaluoShowLabel::enterEvent(QEvent *event)

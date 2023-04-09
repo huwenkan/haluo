@@ -13,8 +13,8 @@ haluo::haluo(QWidget *parent)
     ui->setupUi(this);
     resize(800,500);
     //设置无边框
-//    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-//    setAttribute(Qt::WA_TranslucentBackground);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    setAttribute(Qt::WA_TranslucentBackground);
     haluoShow = new HaluoShow(this);
 
     //设置菜单窗口,默认关闭

@@ -56,10 +56,14 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
     QPushButton *button4 = new QPushButton("退出", label);
     button4->setGeometry(100,100,100,100);
     connect(button4, &QPushButton::clicked, app, &QApplication::quit);
+    //合体
+    QPushButton *button5 = new QPushButton("合体", label);
+    button5->setGeometry(0,200,100,100);
+    connect(button5, &QPushButton::clicked, app, &QApplication::quit);
     //关闭菜单
-    QPushButton *button5 = new QPushButton("关闭", label);
-    button5->setGeometry(100,200,100,100);
-    connect(button5, &QPushButton::clicked, [](){
+    QPushButton *button6 = new QPushButton("关闭", label);
+    button6->setGeometry(100,200,100,100);
+    connect(button6, &QPushButton::clicked, [](){
         //功能总窗口
         menuWidget->menuWidgetFlag = false;
         menuWidget->close();
@@ -74,8 +78,8 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
         noteWidget->noteFlag = false;
     });
 
-    this->setGeometry(0,0,200,300);
-    this->setStyleSheet("background-color: rgba(255, 0, 0, 0.2);");
+    this->setGeometry(50,0,200,300);
+    this->setStyleSheet("background-color: rgba(130, 200, 250, 0.5);");
     //默认关闭
     close();
 }
