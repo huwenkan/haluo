@@ -14,6 +14,8 @@ class MenuWidget : public QWidget
 public:
     explicit MenuWidget(QWidget *parent = nullptr);
 
+    bool skinFlag = false;
+
 signals:
 
 };

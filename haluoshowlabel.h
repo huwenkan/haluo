@@ -20,6 +20,10 @@ public:
     QPixmap *haluoTouchPixmap[8];
     QPixmap *haluoStaticBlackPixmap[8];
     QPixmap *haluoTouchBlackPixmap[8];
+    QPixmap *haluoStaticPinkPixmap[8];
+    QPixmap *haluoTouchPinkPixmap[8];
+    QPixmap *haluoStaticYellowPixmap[8];
+    QPixmap *haluoTouchYellowPixmap[8];
 
     QPixmap *staticShowPixmap[8];
     QPixmap *touchShowPixmap[8];

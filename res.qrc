@@ -32,5 +32,37 @@
         <file>haluo_touch_black/demo6.png</file>
         <file>haluo_touch_black/demo7.png</file>
         <file>haluo_touch_black/demo8.png</file>
+        <file>haluo_touch_pink/demo1.png</file>
+        <file>haluo_touch_pink/demo2.png</file>
+        <file>haluo_touch_pink/demo3.png</file>
+        <file>haluo_touch_pink/demo4.png</file>
+        <file>haluo_touch_pink/demo5.png</file>
+        <file>haluo_touch_pink/demo6.png</file>
+        <file>haluo_touch_pink/demo7.png</file>
+        <file>haluo_touch_pink/demo8.png</file>
+        <file>haluo_static_pink/demo1.png</file>
+        <file>haluo_static_pink/demo2.png</file>
+        <file>haluo_static_pink/demo3.png</file>
+        <file>haluo_static_pink/demo4.png</file>
+        <file>haluo_static_pink/demo5.png</file>
+        <file>haluo_static_pink/demo6.png</file>
+        <file>haluo_static_pink/demo7.png</file>
+        <file>haluo_static_pink/demo8.png</file>
+        <file>haluo_static_yellow/demo1.png</file>
+        <file>haluo_static_yellow/demo2.png</file>
+        <file>haluo_static_yellow/demo3.png</file>
+        <file>haluo_static_yellow/demo4.png</file>
+        <file>haluo_static_yellow/demo5.png</file>
+        <file>haluo_static_yellow/demo6.png</file>
+        <file>haluo_static_yellow/demo7.png</file>
+        <file>haluo_static_yellow/demo8.png</file>
+        <file>haluo_touch_yellow/demo1.png</file>
+        <file>haluo_touch_yellow/demo2.png</file>
+        <file>haluo_touch_yellow/demo3.png</file>
+        <file>haluo_touch_yellow/demo4.png</file>
+        <file>haluo_touch_yellow/demo5.png</file>
+        <file>haluo_touch_yellow/demo6.png</file>
+        <file>haluo_touch_yellow/demo7.png</file>
+        <file>haluo_touch_yellow/demo8.png</file>
     </qresource>
 </RCC>

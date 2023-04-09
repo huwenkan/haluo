@@ -3,6 +3,7 @@
 HaluoShowLabel::HaluoShowLabel(QWidget *parent) : QLabel(parent)
 {
     //初始化动态切换图片
+    //绿色
     for (int i=0; i<8; i++) {
         QString path=QString(":/haluo_static/demo0%1.png").arg(i+1);
         haluoStaticPixmap[i]=new QPixmap(path);
@@ -11,6 +12,7 @@ HaluoShowLabel::HaluoShowLabel(QWidget *parent) : QLabel(parent)
         QString path=QString(":/haluo_touch/demo0%1.png").arg(i+1);
         haluoTouchPixmap[i]=new QPixmap(path);
     }
+    //黑色
     for (int i=0; i<8; i++) {
         QString path=QString(":/haluo_static_black/demo%1.png").arg(i+1);
         haluoStaticBlackPixmap[i]=new QPixmap(path);
@@ -19,7 +21,29 @@ HaluoShowLabel::HaluoShowLabel(QWidget *parent) : QLabel(parent)
         QString path=QString(":/haluo_touch_black/demo%1.png").arg(i+1);
         haluoTouchBlackPixmap[i]=new QPixmap(path);
     }
+    //粉色
+    for (int i=0; i<8; i++) {
+        QString path=QString(":/haluo_static_pink/demo%1.png").arg(i+1);
+        haluoStaticPinkPixmap[i]=new QPixmap(path);
+    }
+    for (int i=0; i<8; i++) {
+        QString path=QString(":/haluo_touch_pink/demo%1.png").arg(i+1);
+        haluoTouchPinkPixmap[i]=new QPixmap(path);
+    }
+    //黄色
+    for (int i=0; i<8; i++) {
+        QString path=QString(":/haluo_static_yellow/demo%1.png").arg(i+1);
+        haluoStaticYellowPixmap[i]=new QPixmap(path);
+    }
+    for (int i=0; i<8; i++) {
+        QString path=QString(":/haluo_touch_yellow/demo%1.png").arg(i+1);
+        haluoTouchYellowPixmap[i]=new QPixmap(path);
+    }
 
+    for (int i=0; i<8; i++) {
+        staticShowPixmap[i]=haluoStaticPixmap[i];
+        touchShowPixmap[i]=haluoTouchPixmap[i];
+    }
     for (int i=0; i<8; i++) {
         staticShowPixmap[i]=haluoStaticPixmap[i];
         touchShowPixmap[i]=haluoTouchPixmap[i];

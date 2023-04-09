@@ -3,13 +3,24 @@
 
 #include "haluoshow.h"
 #include "menuwidget.h"
+#include "music/musicwidget.h"
+#include "note/notewidget.h"
 
 #include <QWidget>
 #include <QMouseEvent>
 #include <QApplication>
 
+class HaluoShow;
+class HaluoShowLabel;
+class MenuWidget;
+class MusicWidget;
+class NoteWidget;
+
 //用于全局访问来更改状态
 extern HaluoShow *haluoShow;
+extern MenuWidget *menuWidget;
+extern MusicWidget *musicWidget;
+extern NoteWidget *noteWidget;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class haluo; }
@@ -33,7 +44,6 @@ private:
     Ui::haluo *ui;
     QPoint dragPosition;
     bool childWidgetFlag = false;
-    MenuWidget *menuWidget = nullptr;
 
 };
 #endif // HALUO_H

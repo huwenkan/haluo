@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,13 +14,17 @@ SOURCES += \
     haluoshowlabel.cpp \
     main.cpp \
     haluo.cpp \
-    menuwidget.cpp
+    menuwidget.cpp \
+    music/musicwidget.cpp \
+    note/notewidget.cpp
 
 HEADERS += \
     haluo.h \
     haluoshow.h \
     haluoshowlabel.h \
-    menuwidget.h
+    menuwidget.h \
+    music/musicwidget.h \
+    note/notewidget.h
 
 FORMS += \
     haluo.ui \
