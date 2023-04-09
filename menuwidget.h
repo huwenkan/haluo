@@ -15,6 +15,7 @@ public:
     explicit MenuWidget(QWidget *parent = nullptr);
 
     bool skinFlag = false;
+    bool menuWidgetFlag = false;
 
 signals:
 

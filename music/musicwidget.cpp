@@ -70,8 +70,7 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
         if(!playerFlag){
             QString fileName = listWidget->currentItem()->text();
             fileName.append(".mp3");
-            qDebug()<<QUrl::fromLocalFile("D:\\QTProject\\build-haluo-Desktop_Qt_5_12_10_MinGW_32_bit-Debug\\debug\\music\\I_Really_Want_to_Stay_At_Your_House.mp3");
-            player->setMedia(QUrl::fromLocalFile(fileName));
+            player->setMedia(QUrl::fromLocalFile(musicPath.append(fileName)));
             player->setVolume(50);
             player->play();
             playerFlag = true;

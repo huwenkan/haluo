@@ -16,7 +16,7 @@ public:
     explicit MusicWidget(QWidget *parent = nullptr);
     //显示窗口标志
     bool musicFlag = false;
-    QString musicPath="./debug/music";
+    QString musicPath=QDir::currentPath().append("/music/");
     QMediaPlayer* player;
     QListWidget *listWidget;
     bool playerFlag = false;

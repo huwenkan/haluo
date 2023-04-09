@@ -43,7 +43,6 @@ public:
 private:
     Ui::haluo *ui;
     QPoint dragPosition;
-    bool childWidgetFlag = false;
 
 };
 #endif // HALUO_H

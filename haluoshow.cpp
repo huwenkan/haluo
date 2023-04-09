@@ -30,7 +30,7 @@ HaluoShow::HaluoShow(QWidget *parent) :
         //菜单总窗口关闭
         menuWidget->close();
         //音乐窗口关闭
-//        musicWidget->close();
+        musicWidget->close();
     });
     QPushButton *button2 = new QPushButton("黑色", skinLabel);
     button2->setStyleSheet("background-color: rgba(0, 0, 0, 0.5)");
@@ -46,7 +46,7 @@ HaluoShow::HaluoShow(QWidget *parent) :
         //菜单总窗口关闭
         menuWidget->close();
         //音乐窗口关闭
-//        musicWidget->close();
+        musicWidget->close();
     });
     QPushButton *button3 = new QPushButton("粉色", skinLabel);
     button3->setStyleSheet("background-color: rgba(255, 192, 203, 0.5)");
@@ -62,7 +62,7 @@ HaluoShow::HaluoShow(QWidget *parent) :
         //菜单总窗口关闭
         menuWidget->close();
         //音乐窗口关闭
-//        musicWidget->close();
+        musicWidget->close();
     });
     QPushButton *button4 = new QPushButton("黄色", skinLabel);
     button4->setStyleSheet("background-color: rgba(255, 255, 0, 0.5)");
@@ -78,7 +78,7 @@ HaluoShow::HaluoShow(QWidget *parent) :
         //菜单总窗口关闭
         menuWidget->close();
         //音乐窗口关闭
-//        musicWidget->close();
+        musicWidget->close();
     });
     skinLabel->show();
     skinWidget->close();

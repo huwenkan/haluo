@@ -60,12 +60,12 @@ void haluo::mouseReleaseEvent(QMouseEvent *event)
 void haluo::mouseDoubleClickEvent(QMouseEvent *event)
 {
     // 弹出另一个QWidget
-    if(!childWidgetFlag){
+    if(!menuWidget->menuWidgetFlag){
          menuWidget->show();
-         childWidgetFlag = true;
+         menuWidget->menuWidgetFlag = true;
     }else {
          //功能总窗口
-         childWidgetFlag = false;
+         menuWidget->menuWidgetFlag = false;
          menuWidget->close();
          //皮肤
          haluoShow->skinWidget->close();

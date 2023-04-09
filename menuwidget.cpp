@@ -4,7 +4,7 @@
 MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
 {
     QLabel *label = new QLabel(this);
-    label->setFixedSize(200,200);
+    label->setFixedSize(200,300);
     label->show();
 
     QPushButton *button1 = new QPushButton("记事本", label);
@@ -52,12 +52,29 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
             skinFlag = false;
         }
     });
-    //退出、
+    //退出
     QPushButton *button4 = new QPushButton("退出", label);
     button4->setGeometry(100,100,100,100);
     connect(button4, &QPushButton::clicked, app, &QApplication::quit);
+    //关闭菜单
+    QPushButton *button5 = new QPushButton("关闭", label);
+    button5->setGeometry(100,200,100,100);
+    connect(button5, &QPushButton::clicked, [](){
+        //功能总窗口
+        menuWidget->menuWidgetFlag = false;
+        menuWidget->close();
+        //皮肤
+        haluoShow->skinWidget->close();
+        menuWidget->skinFlag = false;
+        //音乐
+        musicWidget->close();
+        musicWidget->musicFlag = false;
+        //记事本
+        noteWidget->close();
+        noteWidget->noteFlag = false;
+    });
 
-    this->setGeometry(0,0,200,200);
+    this->setGeometry(0,0,200,300);
     this->setStyleSheet("background-color: rgba(255, 0, 0, 0.2);");
     //默认关闭
     close();

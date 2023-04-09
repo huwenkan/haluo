@@ -26,7 +26,6 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     {
         fileName = fileName.split(".")[0];
         QListWidgetItem* fileItem = new QListWidgetItem(fileName);
-//        qDebug()<<fileName;
         listWidget->addItem(fileItem);
     }
 
@@ -35,24 +34,23 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     textEdit = new QTextEdit(widget);
     textEdit->close();
 
+    textEdit->resize(widget->width(),widget->height());
     widget->setWindowModality(Qt::WindowModal);
     widget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
     widget->resize(400,400);
 
-    QVBoxLayout *layout1 =new QVBoxLayout();
-    layout->addWidget(textEdit);
-    QPushButton *saveButton = new QPushButton("Save",widget);
-    layout->addWidget(saveButton);
-    widget->setLayout(layout1);
+    //布局
+    QVBoxLayout *textLayout =new QVBoxLayout();
+    textLayout->addWidget(textEdit);
+    saveButton = new QPushButton("Save",widget);
+    textLayout->addWidget(saveButton);
+    widget->setLayout(textLayout);
 
     connect(openButton,&QPushButton::clicked,[&](){
         if(listWidget->currentItem() != nullptr){
             textEdit->show();
-//            widget->setWindowModality(Qt::WindowModal);
-//            widget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
-//            widget->resize(400,400);
             widget->setWindowTitle(listWidget->currentItem()->text());
-            QString fileName=listWidget->currentItem()->text().append(".txt").insert(0,"/debug/note/").insert(0,QDir::currentPath());
+            QString fileName=listWidget->currentItem()->text().append(".txt").insert(0,notePath);
 
             file = new QFile(fileName);
             if (!file->open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -66,26 +64,18 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
             textEdit->setTextCursor(cursor);
             textEdit->setFocus();
             file->close();
-            if (!file->open(QIODevice::WriteOnly | QIODevice::Text)) {
-                QMessageBox::warning(nullptr, "Error", "Failed to save file: " + file->errorString());
-            }
-
-            //布局
-//            QVBoxLayout *layout =new QVBoxLayout();
-//            layout->addWidget(textEdit);
-//            QPushButton *saveButton = new QPushButton("Save");
-//            layout->addWidget(saveButton);
-//            widget->setLayout(layout);
-            textEdit->resize(widget->width(),widget->height());
             widget->show();
-            connect(saveButton,&QPushButton::clicked,[&](){
-                QTextStream out(file);
-//                qDebug()<<textEdit->toPlainText();
-                out << textEdit->toPlainText();
-                file->close();
-                widget->close();
-            });
         }
+    });
+
+    connect(saveButton,&QPushButton::clicked,[&](){
+        if (!file->open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QMessageBox::warning(nullptr, "Error", "Failed to save file: " + file->errorString());
+        }
+        QTextStream out(file);
+        out << textEdit->toPlainText();
+        file->close();
+        widget->close();
     });
     //默认关闭
     close();

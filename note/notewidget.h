@@ -19,10 +19,11 @@ public:
     //显示窗口标志
     bool noteFlag = false;
     QListWidget *listWidget;
-    QString notePath="./debug/note";
+    QString notePath=QDir::currentPath().append("/note/");
     QTextEdit *textEdit;
     QWidget *widget;
     QFile *file;
+    QPushButton *saveButton;
 
 signals:
 
