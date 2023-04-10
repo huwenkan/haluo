@@ -22,7 +22,7 @@ public:
     QString notePath=QDir::currentPath().append("/note/");
     QTextEdit *textEdit;
     QWidget *widget;
-    QFile *file;
+    QString  fileName;
     QPushButton *saveButton;
 
 signals:

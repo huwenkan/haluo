@@ -49,31 +49,32 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
         if(listWidget->currentItem() != nullptr){
             textEdit->show();
             widget->setWindowTitle(listWidget->currentItem()->text());
-            QString fileName=listWidget->currentItem()->text().append(".txt").insert(0,notePath);
+            fileName=listWidget->currentItem()->text().append(".txt").insert(0,notePath);
 
-            file = new QFile(fileName);
-            if (!file->open(QIODevice::ReadOnly | QIODevice::Text)) {
-                QMessageBox::warning(nullptr, "Error", "Failed to open file: " + file->errorString());
+            QFile file(fileName);
+            if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QMessageBox::warning(nullptr, "Error", "Failed to open file: " + file.errorString());
             }
-            QTextStream in(file);
+            QTextStream in(&file);
             textEdit->setText(in.readAll());
             //光标定位到末尾
             QTextCursor cursor = textEdit->textCursor();
             cursor.movePosition(QTextCursor::End);
             textEdit->setTextCursor(cursor);
             textEdit->setFocus();
-            file->close();
+            file.close();
             widget->show();
         }
     });
 
     connect(saveButton,&QPushButton::clicked,[&](){
-        if (!file->open(QIODevice::WriteOnly | QIODevice::Text)) {
-            QMessageBox::warning(nullptr, "Error", "Failed to save file: " + file->errorString());
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QMessageBox::warning(nullptr, "Error", "Failed to save file: " + file.errorString());
         }
-        QTextStream out(file);
+        QTextStream out(&file);
         out << textEdit->toPlainText();
-        file->close();
+        file.close();
         widget->close();
     });
     //默认关闭
