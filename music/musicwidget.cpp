@@ -17,17 +17,32 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     QStringList fileList = dir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
     foreach (QString fileName, fileList)
     {
-        fileName = fileName.split(".")[0];
         QListWidgetItem* fileItem = new QListWidgetItem(fileName);
         listWidget->addItem(fileItem);
     }
 
     //添加音乐，模态窗口
-    //修改favico
+    //TODO 修改favico
 
     //添加删除按钮
     QPushButton* addButton = new QPushButton("添加", this);
     QPushButton* deleteButton = new QPushButton("删除", this);
+    QPushButton* playButton = new QPushButton("播放", this);
+    QPushButton* pauseButton = new QPushButton("暂停", this);
+
+    //布局
+    QGridLayout *layout = new QGridLayout(this);
+    layout->addWidget(listWidget,0,0,1,2);
+    layout->addWidget(addButton,1,0,1,1);
+    layout->addWidget(deleteButton,1,1,1,2);
+    layout->addWidget(playButton,2,0,1,1);
+    layout->addWidget(pauseButton,2,1,1,2);
+    setLayout(layout);
+
+    //设置音乐播放列表
+    player = new QMediaPlayer(listWidget);
+
+    //设置按钮信号
     connect(addButton, &QPushButton::clicked, [&]() {
         QString filePath = QFileDialog::getOpenFileName(this,
                                                             tr("Select Music File"),
@@ -44,7 +59,6 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
         //文件添加到播放列表上
         QStringList list = filePath.split("/");
         QString fileName = list.at(list.size()-1);
-        fileName = fileName.split(".")[0];
 
         QListWidgetItem* newItem = new QListWidgetItem(fileName);
         listWidget->addItem(newItem);
@@ -58,25 +72,19 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
             delete item;
         }
     });
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(listWidget);
-    layout->addWidget(addButton);
-    layout->addWidget(deleteButton);
-    setLayout(layout);
-
-   //设置音乐播放器
-    player = new QMediaPlayer(listWidget);
-    connect(listWidget,&QListWidget::itemClicked,[&](){
-        if(!playerFlag){
+    connect(playButton, &QPushButton::clicked, [&]() {
+        if(QMediaPlayer::StoppedState == player->state()){
             QString fileName = listWidget->currentItem()->text();
-            fileName.append(".mp3");
-            player->setMedia(QUrl::fromLocalFile(musicPath.append(fileName)));
+            player->setMedia(QUrl::fromLocalFile(musicPath + fileName));
             player->setVolume(50);
             player->play();
-            playerFlag = true;
-        } else {
+        } else if (QMediaPlayer::PausedState == player->state()) {
+            player->play();
+        }
+    });
+    connect(pauseButton, &QPushButton::clicked, [&]() {
+        if(QMediaPlayer::PlayingState == player->state()){
             player->pause();
-            playerFlag = false;
         }
     });
     //默认关闭

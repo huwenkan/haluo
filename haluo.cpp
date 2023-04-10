@@ -34,15 +34,33 @@ haluo::~haluo()
 //设置鼠标可拖动
 void haluo::mousePressEvent(QMouseEvent *event)
 {
-    //判断菜单窗口未打开
    if (event->button() == Qt::LeftButton) {
        dragPosition = event->globalPos() - frameGeometry().topLeft();
        event->accept();
    }
+   //右键打开菜单窗口
+   else if (event->button() == Qt::RightButton) {
+       if(!menuWidget->menuWidgetFlag){
+            menuWidget->show();
+            menuWidget->menuWidgetFlag = true;
+       }else {
+            //功能总窗口
+            menuWidget->menuWidgetFlag = false;
+            menuWidget->close();
+            //皮肤
+            haluoShow->skinWidget->close();
+            menuWidget->skinFlag = false;
+            //音乐
+            musicWidget->close();
+            musicWidget->musicFlag = false;
+            //记事本
+            noteWidget->close();
+            noteWidget->noteFlag = false;
+       }
+    }
 }
 void haluo::mouseMoveEvent(QMouseEvent *event)
 {
-    //判断菜单窗口未打开
     if (event->buttons() & Qt::LeftButton) {
         move(event->globalPos() - dragPosition);
         event->accept();
@@ -50,31 +68,30 @@ void haluo::mouseMoveEvent(QMouseEvent *event)
 }
 void haluo::mouseReleaseEvent(QMouseEvent *event)
 {
-    //判断菜单窗口未打开
     if (event->button() == Qt::LeftButton) {
         dragPosition = QPoint();
         event->accept();
     }
 }
 //双击出现菜单窗口
-void haluo::mouseDoubleClickEvent(QMouseEvent *event)
-{
-    // 弹出另一个QWidget
-    if(!menuWidget->menuWidgetFlag){
-         menuWidget->show();
-         menuWidget->menuWidgetFlag = true;
-    }else {
-         //功能总窗口
-         menuWidget->menuWidgetFlag = false;
-         menuWidget->close();
-         //皮肤
-         haluoShow->skinWidget->close();
-         menuWidget->skinFlag = false;
-         //音乐
-         musicWidget->close();
-         musicWidget->musicFlag = false;
-         //记事本
-         noteWidget->close();
-         noteWidget->noteFlag = false;
-    }
-}
+//void haluo::mouseDoubleClickEvent(QMouseEvent *event)
+//{
+//    // 弹出另一个QWidget
+//    if(!menuWidget->menuWidgetFlag){
+//         menuWidget->show();
+//         menuWidget->menuWidgetFlag = true;
+//    }else {
+//         //功能总窗口
+//         menuWidget->menuWidgetFlag = false;
+//         menuWidget->close();
+//         //皮肤
+//         haluoShow->skinWidget->close();
+//         menuWidget->skinFlag = false;
+//         //音乐
+//         musicWidget->close();
+//         musicWidget->musicFlag = false;
+//         //记事本
+//         noteWidget->close();
+//         noteWidget->noteFlag = false;
+//    }
+//}

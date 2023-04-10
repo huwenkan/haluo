@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QPushButton>
-#include <QVBoxLayout>
+#include <QGridLayout >
 #include <QDir>
 #include <QFileDialog>
 #include <QMediaPlayer>
@@ -19,7 +19,8 @@ public:
     QString musicPath=QDir::currentPath().append("/music/");
     QMediaPlayer* player;
     QListWidget *listWidget;
-    bool playerFlag = false;
+//    bool playerFlag = false;
+//    bool isPlay = false;//状态是否正在播放
 signals:
 
 };

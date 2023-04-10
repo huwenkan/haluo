@@ -23,7 +23,6 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     QStringList fileList = dir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
     foreach (QString fileName, fileList)
     {
-        fileName = fileName.split(".")[0];
         QListWidgetItem* fileItem = new QListWidgetItem(fileName);
         listWidget->addItem(fileItem);
     }
@@ -49,7 +48,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
         if(listWidget->currentItem() != nullptr){
             textEdit->show();
             widget->setWindowTitle(listWidget->currentItem()->text());
-            fileName=listWidget->currentItem()->text().append(".txt").insert(0,notePath);
+            fileName=notePath + listWidget->currentItem()->text();
 
             QFile file(fileName);
             if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
