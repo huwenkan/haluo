@@ -19,8 +19,6 @@ public:
     QString musicPath=QDir::currentPath().append("/music/");
     QMediaPlayer* player;
     QListWidget *listWidget;
-//    bool playerFlag = false;
-//    bool isPlay = false;//状态是否正在播放
 signals:
 
 };

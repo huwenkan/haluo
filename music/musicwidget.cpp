@@ -12,7 +12,7 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
 
     QDir dir(musicPath);
     QStringList filters;
-    filters << "*.txt"<<"*.mp3"<<"*.wav";
+    filters <<"*.mp3"<<"*.wav";
 
     QStringList fileList = dir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
     foreach (QString fileName, fileList)
@@ -50,24 +50,28 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
                                                             tr("Music Files (*.mp3 *.wav *.ogg)"));
         //文件复制到music目录
         QFile sourceFile(filePath);
-        QFile destinationFile(musicPath);
+
+        QStringList list = filePath.split("/");
+        QString fileName = list.at(list.size()-1);
+
+        QFile destinationFile(musicPath + fileName);
         sourceFile.open(QIODevice::ReadOnly);
         destinationFile.open(QIODevice::WriteOnly);
+
         destinationFile.write(sourceFile.readAll());
         sourceFile.close();
         destinationFile.close();
         //文件添加到播放列表上
-        QStringList list = filePath.split("/");
-        QString fileName = list.at(list.size()-1);
-
-        QListWidgetItem* newItem = new QListWidgetItem(fileName);
+        QListWidgetItem *newItem = new QListWidgetItem(fileName);
         listWidget->addItem(newItem);
-
-        qDebug() << fileName;
     });
     connect(deleteButton, &QPushButton::clicked, [&]() {
         QList<QListWidgetItem*> selectedItems = listWidget->selectedItems();
         foreach(QListWidgetItem* item, selectedItems) {
+            QString fileName = listWidget->currentItem()->text();
+            QString filePath = musicPath + fileName;
+            QFile file(filePath);
+            file.remove();
             listWidget->takeItem(listWidget->row(item));
             delete item;
         }

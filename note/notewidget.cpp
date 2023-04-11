@@ -10,6 +10,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     QPushButton *openButton = new QPushButton("打开", this);
     QPushButton *addButton = new QPushButton("新建", this);
     QPushButton *deleteButton = new QPushButton("删除", this);
+    //布局
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(listWidget);
     layout->addWidget(openButton);
@@ -17,37 +18,62 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     layout->addWidget(deleteButton);
     setLayout(layout);
 
+    //新增记事本窗口
+    addNoteWidget = new QWidget(this);
+    addNoteWidget->setWindowTitle("请输入文件名");
+    addNoteWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
+    noteNameTextEdit = new QLineEdit(addNoteWidget);
+    noteNameTextEdit->setReadOnly(false);
+    addNoteWidget->resize(350,100);
+    QPushButton *confirmButton = new QPushButton("确认",addNoteWidget);
+    QPushButton *cancerButton = new QPushButton("取消",addNoteWidget);
+    connect(confirmButton,&QPushButton::clicked,[&](){
+        QString fileName=noteNameTextEdit->text();
+        QFile file(notePath+fileName);
+        file.open(QIODevice::WriteOnly);
+        file.close();
+        addNoteWidget->close();
+        listWidget->addItem(fileName);
+    });
+    connect(cancerButton,&QPushButton::clicked,[&](){
+        addNoteWidget->close();
+    });
+    //设置新增布局
+    QVBoxLayout *confirmAndCancerLayout = new QVBoxLayout();
+    confirmAndCancerLayout->addWidget(noteNameTextEdit);
+    confirmAndCancerLayout->addWidget(confirmButton);
+    confirmAndCancerLayout->addWidget(cancerButton);
+    addNoteWidget->setLayout(confirmAndCancerLayout);
+
     QDir dir(notePath);
-    QStringList filters;
-    filters << "*.txt";
-    QStringList fileList = dir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
+    QStringList fileList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
     foreach (QString fileName, fileList)
     {
         QListWidgetItem* fileItem = new QListWidgetItem(fileName);
         listWidget->addItem(fileItem);
     }
 
-    widget = new QWidget(listWidget);
-    widget->close();
-    textEdit = new QTextEdit(widget);
+    openWidget = new QWidget(listWidget);
+    openWidget->close();
+    textEdit = new QTextEdit(openWidget);
     textEdit->close();
 
-    textEdit->resize(widget->width(),widget->height());
-    widget->setWindowModality(Qt::WindowModal);
-    widget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
-    widget->resize(400,400);
+    textEdit->resize(openWidget->width(),openWidget->height());
+    openWidget->setWindowModality(Qt::WindowModal);
+    openWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
+    openWidget->resize(400,400);
 
     //布局
     QVBoxLayout *textLayout =new QVBoxLayout();
     textLayout->addWidget(textEdit);
-    saveButton = new QPushButton("Save",widget);
+    saveButton = new QPushButton("Save",openWidget);
     textLayout->addWidget(saveButton);
-    widget->setLayout(textLayout);
+    openWidget->setLayout(textLayout);
 
     connect(openButton,&QPushButton::clicked,[&](){
         if(listWidget->currentItem() != nullptr){
             textEdit->show();
-            widget->setWindowTitle(listWidget->currentItem()->text());
+            openWidget->setWindowTitle(listWidget->currentItem()->text());
             fileName=notePath + listWidget->currentItem()->text();
 
             QFile file(fileName);
@@ -62,7 +88,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
             textEdit->setTextCursor(cursor);
             textEdit->setFocus();
             file.close();
-            widget->show();
+            openWidget->show();
         }
     });
 
@@ -74,7 +100,21 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
         QTextStream out(&file);
         out << textEdit->toPlainText();
         file.close();
-        widget->close();
+        openWidget->close();
+    });
+
+    connect(deleteButton,&QPushButton::clicked,[&](){
+       QString fileName =  listWidget->currentItem()->text();
+       QString filePath = notePath + fileName;
+       QFile file(filePath);
+       file.remove();
+       QListWidgetItem *item = listWidget->currentItem();
+       listWidget->takeItem(listWidget->row(item));
+       delete item;
+    });
+
+    connect(addButton,&QPushButton::clicked,[&](){
+        addNoteWidget->show();
     });
     //默认关闭
     close();

@@ -10,6 +10,8 @@
 #include <QTextEdit>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QLineEdit>
+#include <QPlainTextEdit>
 
 class NoteWidget : public QWidget
 {
@@ -21,9 +23,11 @@ public:
     QListWidget *listWidget;
     QString notePath=QDir::currentPath().append("/note/");
     QTextEdit *textEdit;
-    QWidget *widget;
+    QWidget *openWidget;
     QString  fileName;
     QPushButton *saveButton;
+    QWidget *addNoteWidget;
+    QLineEdit *noteNameTextEdit;
 
 signals:
 
