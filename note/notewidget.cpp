@@ -20,11 +20,27 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
 
     //新增记事本窗口
     addNoteWidget = new QWidget(this);
-    addNoteWidget->setWindowTitle("请输入文件名");
     addNoteWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
+    addNoteWidget->setWindowTitle("请输入文件名");
     noteNameTextEdit = new QLineEdit(addNoteWidget);
     noteNameTextEdit->setReadOnly(false);
     addNoteWidget->resize(350,100);
+//    noteNameTextEdit = new QLineEdit(addNoteWidget);
+//    noteNameTextEdit->setPlaceholderText("请输入...");
+//    noteNameTextEdit->setAttribute(Qt::WA_InputMethodEnabled);
+//    noteNameTextEdit->setFocus();
+//    addNoteWidget->resize(350,100);
+//    // 获取屏幕的宽度和高度
+//    QScreen *screen = QGuiApplication::primaryScreen();
+//    QRect screenGeometry = screen->geometry();
+//    int screenWidth = screenGeometry.width();
+//    int screenHeight = screenGeometry.height();
+//    // 获取窗口的宽度和高度
+//    int width = addNoteWidget->width();
+//    int height = addNoteWidget->height();
+//    // 将窗口移动到屏幕的中心
+//    addNoteWidget->move((screenWidth - width) / 2, (screenHeight - height) / 2);
+
     QPushButton *confirmButton = new QPushButton("确认",addNoteWidget);
     QPushButton *cancerButton = new QPushButton("取消",addNoteWidget);
     connect(confirmButton,&QPushButton::clicked,[&](){

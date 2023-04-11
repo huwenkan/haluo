@@ -12,6 +12,8 @@
 #include <QMessageBox>
 #include <QLineEdit>
 #include <QPlainTextEdit>
+#include <QApplication>
+#include <QScreen>
 
 class NoteWidget : public QWidget
 {
