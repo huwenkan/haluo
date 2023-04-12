@@ -77,12 +77,15 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
         }
     });
     connect(playButton, &QPushButton::clicked, [&]() {
-        if(QMediaPlayer::StoppedState == player->state()){
-            QString fileName = listWidget->currentItem()->text();
+        QString file = listWidget->currentItem()->text();
+        if(fileName.compare(file)==0){
+            if (QMediaPlayer::PausedState == player->state()) {
+                player->play();
+            }
+        } else {
+            fileName = listWidget->currentItem()->text();
             player->setMedia(QUrl::fromLocalFile(musicPath + fileName));
             player->setVolume(50);
-            player->play();
-        } else if (QMediaPlayer::PausedState == player->state()) {
             player->play();
         }
     });

@@ -42,7 +42,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
 //    addNoteWidget->move((screenWidth - width) / 2, (screenHeight - height) / 2);
 
     QPushButton *confirmButton = new QPushButton("确认",addNoteWidget);
-    QPushButton *cancerButton = new QPushButton("取消",addNoteWidget);
+    QPushButton *cancelButton = new QPushButton("取消",addNoteWidget);
     connect(confirmButton,&QPushButton::clicked,[&](){
         QString fileName=noteNameTextEdit->text();
         QFile file(notePath+fileName);
@@ -51,14 +51,14 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
         addNoteWidget->close();
         listWidget->addItem(fileName);
     });
-    connect(cancerButton,&QPushButton::clicked,[&](){
+    connect(cancelButton,&QPushButton::clicked,[&](){
         addNoteWidget->close();
     });
     //设置新增布局
     QVBoxLayout *confirmAndCancerLayout = new QVBoxLayout();
     confirmAndCancerLayout->addWidget(noteNameTextEdit);
     confirmAndCancerLayout->addWidget(confirmButton);
-    confirmAndCancerLayout->addWidget(cancerButton);
+    confirmAndCancerLayout->addWidget(cancelButton);
     addNoteWidget->setLayout(confirmAndCancerLayout);
 
     QDir dir(notePath);

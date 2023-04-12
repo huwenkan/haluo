@@ -9,6 +9,9 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <QApplication>
+#include <QSystemTrayIcon>
+#include <QMenu>
+#include <QSystemTrayIcon>
 
 class HaluoShow;
 class HaluoShowLabel;

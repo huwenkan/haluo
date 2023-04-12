@@ -13,7 +13,7 @@ haluo::haluo(QWidget *parent)
     ui->setupUi(this);
     resize(800,500);
     //设置无边框
-    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     haluoShow = new HaluoShow(this);
 
@@ -25,6 +25,7 @@ haluo::haluo(QWidget *parent)
 
     //创建记事本窗口
     noteWidget = new NoteWidget(this);
+
 }
 
 haluo::~haluo()
@@ -73,25 +74,4 @@ void haluo::mouseReleaseEvent(QMouseEvent *event)
         event->accept();
     }
 }
-//双击出现菜单窗口
-//void haluo::mouseDoubleClickEvent(QMouseEvent *event)
-//{
-//    // 弹出另一个QWidget
-//    if(!menuWidget->menuWidgetFlag){
-//         menuWidget->show();
-//         menuWidget->menuWidgetFlag = true;
-//    }else {
-//         //功能总窗口
-//         menuWidget->menuWidgetFlag = false;
-//         menuWidget->close();
-//         //皮肤
-//         haluoShow->skinWidget->close();
-//         menuWidget->skinFlag = false;
-//         //音乐
-//         musicWidget->close();
-//         musicWidget->musicFlag = false;
-//         //记事本
-//         noteWidget->close();
-//         noteWidget->noteFlag = false;
-//    }
-//}
+

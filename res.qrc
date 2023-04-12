@@ -64,5 +64,6 @@
         <file>haluo_touch_yellow/demo6.png</file>
         <file>haluo_touch_yellow/demo7.png</file>
         <file>haluo_touch_yellow/demo8.png</file>
+        <file>ico/haluo_blue.ico</file>
     </qresource>
 </RCC>
