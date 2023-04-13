@@ -5,41 +5,13 @@ HaluoShowLabel::HaluoShowLabel(QWidget *parent) : QLabel(parent)
 {
     //初始化动态切换图片
     //绿色
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_static/demo0%1.png").arg(i+1);
-        haluoStaticPixmap[i]=new QPixmap(path);
-    }
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_touch/demo0%1.png").arg(i+1);
-        haluoTouchPixmap[i]=new QPixmap(path);
-    }
+    addPixmapList(haluoStaticPixmap,haluoTouchPixmap,":/haluo_static/demo0%1.png",":/haluo_touch/demo0%1.png",8,8);
     //黑色
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_static_black/demo%1.png").arg(i+1);
-        haluoStaticBlackPixmap[i]=new QPixmap(path);
-    }
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_touch_black/demo%1.png").arg(i+1);
-        haluoTouchBlackPixmap[i]=new QPixmap(path);
-    }
+    addPixmapList(haluoStaticBlackPixmap,haluoTouchBlackPixmap,":/haluo_static_black/demo%1.png",":/haluo_touch_black/demo%1.png",8,8);
     //粉色
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_static_pink/demo%1.png").arg(i+1);
-        haluoStaticPinkPixmap[i]=new QPixmap(path);
-    }
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_touch_pink/demo%1.png").arg(i+1);
-        haluoTouchPinkPixmap[i]=new QPixmap(path);
-    }
+    addPixmapList(haluoStaticPinkPixmap,haluoTouchPinkPixmap,":/haluo_static_pink/demo%1.png",":/haluo_touch_pink/demo%1.png",8,8);
     //黄色
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_static_yellow/demo%1.png").arg(i+1);
-        haluoStaticYellowPixmap[i]=new QPixmap(path);
-    }
-    for (int i=0; i<8; i++) {
-        QString path=QString(":/haluo_touch_yellow/demo%1.png").arg(i+1);
-        haluoTouchYellowPixmap[i]=new QPixmap(path);
-    }
+    addPixmapList(haluoStaticYellowPixmap,haluoTouchYellowPixmap,":/haluo_static_yellow/demo%1.png",":/haluo_touch_yellow/demo%1.png",8,8);
 
     for (int i=0; i<8; i++) {
         staticShowPixmap[i]=haluoStaticPixmap[i];
@@ -80,4 +52,16 @@ void HaluoShowLabel::leaveEvent(QEvent *event)
 {
     haluoStaticTimer->start(50);
     haluoTouchTimer->stop();
+}
+
+void HaluoShowLabel::addPixmapList(QPixmap *staticPixmap[],QPixmap *touchPixmap[],QString staticPath,QString touchPath, int staticNum,int touchNum)
+{
+    for (int i=0; i<staticNum; i++) {
+        QString path=staticPath.arg(i+1);
+        staticPixmap[i]=new QPixmap(path);
+    }
+    for (int i=0; i<touchNum; i++) {
+        QString path=touchPath.arg(i+1);
+        touchPixmap[i]=new QPixmap(path);
+    }
 }

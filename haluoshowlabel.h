@@ -33,6 +33,7 @@ public:
 signals:
 
 private:
+    void addPixmapList(QPixmap *staticPixmap[], QPixmap *touchPixmap[], QString staticPath, QString touchPath, int staticNum, int touchNum);
 };
 
 #endif // HALUOSHOWLABEL_H

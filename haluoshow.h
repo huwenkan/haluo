@@ -24,6 +24,8 @@ public:
     QWidget *skinWidget;
     QLabel *skinLabel;
 
+    void connectButton(QPushButton *button1,QPixmap *haluoStaticPixmap[],QPixmap *haluoTouchPixmap[],QString style);
+    
 private:
     Ui::HaluoShow *ui;
 };

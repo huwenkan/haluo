@@ -13,6 +13,7 @@ haluo::haluo(QWidget *parent)
     ui->setupUi(this);
     resize(800,500);
     //设置无边框
+    //强制退出会报错&&启动之后第一下点击会卡顿
     setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     haluoShow = new HaluoShow(this);
