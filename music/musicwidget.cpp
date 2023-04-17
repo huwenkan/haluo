@@ -6,15 +6,12 @@
 //音乐播放窗口模块
 MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
 {
-    setGeometry(450,0,200,200);
+    setGeometry(450,0,400,400);
     //设置音乐窗口
     listWidget = new QListWidget(this);
 
     QDir dir(musicPath);
-    QStringList filters;
-    filters <<"*.mp3"<<"*.wav";
-
-    QStringList fileList = dir.entryList(filters, QDir::Files | QDir::NoDotAndDotDot);
+    QStringList fileList = dir.entryList( QDir::Files | QDir::NoDotAndDotDot);
     foreach (QString fileName, fileList)
     {
         QListWidgetItem* fileItem = new QListWidgetItem(fileName);
@@ -22,7 +19,16 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     }
 
     //添加音乐，模态窗口
-    //TODO 修改favico
+
+    //设置字体颜色
+    QPalette palette = listWidget->palette();
+    palette.setColor(QPalette::Text, Qt::white);
+    listWidget->setPalette(palette);
+    //设置图片背景
+    listWidget->setStyleSheet("background-image: url(:/background/gunda.jpg);background-position: center;background-repeat: no-repeat;");
+//    QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(this);
+//    opacityEffect->setOpacity(0.7);
+//    listWidget->setGraphicsEffect(opacityEffect);
 
     //添加删除按钮
     QPushButton* addButton = new QPushButton("添加", this);
@@ -31,13 +37,20 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     QPushButton* pauseButton = new QPushButton("暂停", this);
 
     //布局
-    QGridLayout *layout = new QGridLayout(this);
-    layout->addWidget(listWidget,0,0,1,2);
-    layout->addWidget(addButton,1,0,1,1);
-    layout->addWidget(deleteButton,1,1,1,2);
-    layout->addWidget(playButton,2,0,1,1);
-    layout->addWidget(pauseButton,2,1,1,2);
-    setLayout(layout);
+    QHBoxLayout *hLayout1 = new QHBoxLayout();
+    hLayout1->addWidget(addButton);
+    hLayout1->addWidget(deleteButton);
+
+    QHBoxLayout *hLayout2 = new QHBoxLayout;
+    hLayout2->addWidget(playButton);
+    hLayout2->addWidget(pauseButton);
+
+    QVBoxLayout *vLayout = new QVBoxLayout(this);
+    vLayout->addWidget(listWidget);
+    vLayout->addLayout(hLayout1);
+    vLayout->addLayout(hLayout2);
+
+    setLayout(vLayout);
 
     //设置音乐播放列表
     player = new QMediaPlayer(listWidget);
@@ -46,8 +59,7 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     connect(addButton, &QPushButton::clicked, [&]() {
         QString filePath = QFileDialog::getOpenFileName(this,
                                                             tr("Select Music File"),
-                                                            QDir::homePath(),
-                                                            tr("Music Files (*.mp3 *.wav *.ogg)"));
+                                                            QDir::homePath());
         //文件复制到music目录
         QFile sourceFile(filePath);
 
@@ -79,7 +91,7 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     connect(playButton, &QPushButton::clicked, [&]() {
         QString file = listWidget->currentItem()->text();
         if(fileName.compare(file)==0){
-            if (QMediaPlayer::PausedState == player->state()) {
+            if (QMediaPlayer::PausedState == player->state() || QMediaPlayer::StoppedState == player->state()) {
                 player->play();
             }
         } else {

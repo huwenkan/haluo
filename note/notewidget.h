@@ -14,6 +14,7 @@
 #include <QPlainTextEdit>
 #include <QApplication>
 #include <QScreen>
+#include <QGraphicsOpacityEffect>
 
 class NoteWidget : public QWidget
 {

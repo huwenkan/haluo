@@ -2,11 +2,19 @@
 
 #include <QDebug>
 
+//记事本窗口模块
 NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
 {
-    setGeometry(450,0,200,200);
+    setGeometry(450,0,400,500);
     //记事本列表
     listWidget = new QListWidget(this);
+    //设置字体
+    QPalette listWidgetPalette = listWidget->palette();
+    listWidgetPalette.setColor(QPalette::Text, Qt::white);
+    listWidget->setPalette(listWidgetPalette);
+    //设置背景
+    listWidget->setStyleSheet("background-image: url(:/background/qnengtianshi.jpg);background-position: center;background-repeat: no-repeat;");
+    //设置功能按钮
     QPushButton *openButton = new QPushButton("打开", this);
     QPushButton *addButton = new QPushButton("新建", this);
     QPushButton *deleteButton = new QPushButton("删除", this);
@@ -25,21 +33,6 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     noteNameTextEdit = new QLineEdit(addNoteWidget);
     noteNameTextEdit->setReadOnly(false);
     addNoteWidget->resize(350,100);
-//    noteNameTextEdit = new QLineEdit(addNoteWidget);
-//    noteNameTextEdit->setPlaceholderText("请输入...");
-//    noteNameTextEdit->setAttribute(Qt::WA_InputMethodEnabled);
-//    noteNameTextEdit->setFocus();
-//    addNoteWidget->resize(350,100);
-//    // 获取屏幕的宽度和高度
-//    QScreen *screen = QGuiApplication::primaryScreen();
-//    QRect screenGeometry = screen->geometry();
-//    int screenWidth = screenGeometry.width();
-//    int screenHeight = screenGeometry.height();
-//    // 获取窗口的宽度和高度
-//    int width = addNoteWidget->width();
-//    int height = addNoteWidget->height();
-//    // 将窗口移动到屏幕的中心
-//    addNoteWidget->move((screenWidth - width) / 2, (screenHeight - height) / 2);
 
     QPushButton *confirmButton = new QPushButton("确认",addNoteWidget);
     QPushButton *cancelButton = new QPushButton("取消",addNoteWidget);
@@ -69,20 +62,38 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
         listWidget->addItem(fileItem);
     }
 
+    //创建文本框窗口
     openWidget = new QWidget(listWidget);
+    openWidget->setStyleSheet("background-image: url(:/background/nengtianshi.jpg);background-position: center;background-repeat: no-repeat;");
+    openWidget->setWindowIcon(QIcon(":/ico/haluo_blue.ico"));
+    //默认关闭
     openWidget->close();
+
+    //设置输入文本框窗口
     textEdit = new QTextEdit(openWidget);
+    QPalette textEditPalette = textEdit->palette();
+    textEditPalette.setColor(QPalette::Text, Qt::black);
+    textEdit->setPalette(textEditPalette);
+    QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(textEdit);
+    opacityEffect->setOpacity(0.7);
+    textEdit->setGraphicsEffect(opacityEffect);
+    //默认关闭
     textEdit->close();
 
     textEdit->resize(openWidget->width(),openWidget->height());
     openWidget->setWindowModality(Qt::WindowModal);
     openWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
-    openWidget->resize(400,400);
+    openWidget->resize(500,500);
 
-    //布局
+    //设置输入文本框的保存按钮的文本颜色
+    saveButton = new QPushButton("保存",openWidget);
+    QPalette saveButtonPalette = saveButton->palette();
+    saveButtonPalette.setColor(QPalette::ButtonText, Qt::white);
+    saveButton->setPalette(saveButtonPalette);
+
+    //输入文本款布局
     QVBoxLayout *textLayout =new QVBoxLayout();
     textLayout->addWidget(textEdit);
-    saveButton = new QPushButton("Save",openWidget);
     textLayout->addWidget(saveButton);
     openWidget->setLayout(textLayout);
 

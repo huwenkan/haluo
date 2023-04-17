@@ -65,5 +65,9 @@
         <file>haluo_touch_yellow/demo7.png</file>
         <file>haluo_touch_yellow/demo8.png</file>
         <file>ico/haluo_blue.ico</file>
+        <file>background/gunda.jpg</file>
+        <file>background/nengtianshi.jpg</file>
+        <file>background/qnengtianshi.jpg</file>
+        <file>ico/haluo.ico</file>
     </qresource>
 </RCC>

@@ -8,6 +8,9 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QMediaPlayer>
+#include <QAudioFormat>
+#include <QLabel>
+#include <QGraphicsOpacityEffect>
 
 class MusicWidget : public QWidget
 {
