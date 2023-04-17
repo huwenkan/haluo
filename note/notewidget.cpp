@@ -30,6 +30,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     addNoteWidget = new QWidget(this);
     addNoteWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
     addNoteWidget->setWindowTitle("请输入文件名");
+    addNoteWidget->setWindowIcon(QIcon(":/ico/haluo_blue.ico"));
     noteNameTextEdit = new QLineEdit(addNoteWidget);
     noteNameTextEdit->setReadOnly(false);
     addNoteWidget->resize(350,100);

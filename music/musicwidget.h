@@ -10,7 +10,7 @@
 #include <QMediaPlayer>
 #include <QAudioFormat>
 #include <QLabel>
-#include <QGraphicsOpacityEffect>
+#include <QMediaPlaylist>
 
 class MusicWidget : public QWidget
 {
@@ -20,9 +20,10 @@ public:
     //显示窗口标志
     bool musicFlag = false;
     QString musicPath=QDir::currentPath().append("/music/");
-    QMediaPlayer* player;
+    QMediaPlayer *player;
     QListWidget *listWidget;
     QString fileName;//当前播放的歌曲
+    QMediaPlaylist *playList;
 signals:
 
 };

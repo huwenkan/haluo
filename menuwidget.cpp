@@ -79,7 +79,7 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
     });
 
     this->setGeometry(50,0,200,300);
-    this->setStyleSheet("background-color: rgba(130, 200, 250, 0.5);");
+    this->setStyleSheet("background-color: rgba(0, 255, 0, 0.5);");
     //默认关闭
     close();
 }

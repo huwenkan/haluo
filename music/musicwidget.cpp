@@ -6,7 +6,7 @@
 //音乐播放窗口模块
 MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
 {
-    setGeometry(450,0,400,400);
+    setGeometry(450,0,400,500);
     //设置音乐窗口
     listWidget = new QListWidget(this);
 
@@ -19,22 +19,19 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     }
 
     //添加音乐，模态窗口
-
     //设置字体颜色
     QPalette palette = listWidget->palette();
-    palette.setColor(QPalette::Text, Qt::white);
+    palette.setColor(QPalette::Text, Qt::black);
     listWidget->setPalette(palette);
     //设置图片背景
-    listWidget->setStyleSheet("background-image: url(:/background/gunda.jpg);background-position: center;background-repeat: no-repeat;");
-//    QGraphicsOpacityEffect *opacityEffect = new QGraphicsOpacityEffect(this);
-//    opacityEffect->setOpacity(0.7);
-//    listWidget->setGraphicsEffect(opacityEffect);
+    listWidget->setStyleSheet("background-image: url(:/background/gundahuahai.jpg);background-position: center;background-repeat: no-repeat;");
 
     //添加删除按钮
     QPushButton* addButton = new QPushButton("添加", this);
     QPushButton* deleteButton = new QPushButton("删除", this);
     QPushButton* playButton = new QPushButton("播放", this);
     QPushButton* pauseButton = new QPushButton("暂停", this);
+    QPushButton* addPlayerListButton = new QPushButton("添加至播放列表", this);
 
     //布局
     QHBoxLayout *hLayout1 = new QHBoxLayout();
@@ -47,13 +44,19 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
 
     QVBoxLayout *vLayout = new QVBoxLayout(this);
     vLayout->addWidget(listWidget);
+    vLayout->addWidget(addPlayerListButton);
     vLayout->addLayout(hLayout1);
     vLayout->addLayout(hLayout2);
 
     setLayout(vLayout);
 
-    //设置音乐播放列表
+    //音乐播放展示列表
     player = new QMediaPlayer(listWidget);
+    //音乐播放列表
+    playList = new QMediaPlaylist();
+    //设置循环播放
+    playList->setPlaybackMode(QMediaPlaylist::Sequential);
+    player->setPlaylist(playList);
 
     //设置按钮信号
     connect(addButton, &QPushButton::clicked, [&]() {
@@ -73,7 +76,7 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
         destinationFile.write(sourceFile.readAll());
         sourceFile.close();
         destinationFile.close();
-        //文件添加到播放列表上
+        //文件添加到展示列表上
         QListWidgetItem *newItem = new QListWidgetItem(fileName);
         listWidget->addItem(newItem);
     });
@@ -88,6 +91,11 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
             delete item;
         }
     });
+    connect(addPlayerListButton, &QPushButton::clicked, [&](){
+            QString fileName = listWidget->currentItem()->text();
+            QString filePath = musicPath + fileName;
+            playList->addMedia(QUrl::fromLocalFile(filePath));
+    });
     connect(playButton, &QPushButton::clicked, [&]() {
         QString file = listWidget->currentItem()->text();
         if(fileName.compare(file)==0){
@@ -95,15 +103,23 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
                 player->play();
             }
         } else {
-            fileName = listWidget->currentItem()->text();
-            player->setMedia(QUrl::fromLocalFile(musicPath + fileName));
+            fileName = file;
+            QUrl musicFile = QUrl::fromLocalFile(musicPath + fileName);
+            player->setMedia(musicFile);
             player->setVolume(50);
+            playList->addMedia(musicFile);
             player->play();
         }
     });
     connect(pauseButton, &QPushButton::clicked, [&]() {
         if(QMediaPlayer::PlayingState == player->state()){
             player->pause();
+        }
+    });
+    //检测音乐播放完毕，自动播放播放列表中的下一首
+    connect(player, &QMediaPlayer::stateChanged, [=](QMediaPlayer::State state) {
+        if (state == QMediaPlayer::StoppedState) {
+            player->play();
         }
     });
     //默认关闭
