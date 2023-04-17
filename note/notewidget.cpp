@@ -10,7 +10,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     listWidget = new QListWidget(this);
     //设置字体
     QPalette listWidgetPalette = listWidget->palette();
-    listWidgetPalette.setColor(QPalette::Text, Qt::white);
+    listWidgetPalette.setColor(QPalette::Text, Qt::black);
     listWidget->setPalette(listWidgetPalette);
     //设置背景
     listWidget->setStyleSheet("background-image: url(:/background/qnengtianshi.jpg);background-position: center;background-repeat: no-repeat;");

@@ -94,20 +94,49 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
     connect(addPlayerListButton, &QPushButton::clicked, [&](){
             QString fileName = listWidget->currentItem()->text();
             QString filePath = musicPath + fileName;
-            playList->addMedia(QUrl::fromLocalFile(filePath));
+            QUrl muscicFile = QUrl::fromLocalFile(filePath);
+            QMediaContent newSong(filePath);
+            for (int i=0; i<playList->mediaCount(); i++) {
+                const QMediaContent& content = playList->media(i);
+                if(content.canonicalUrl()==newSong.canonicalUrl()){
+                    playList->removeMedia(i);
+                    playList->insertMedia(0,muscicFile);
+
+                    qDebug()<<"remove:"<<muscicFile;
+                    qDebug()<<"add -- > insert:"<<muscicFile;
+                    return;
+                }
+            }
+            playList->addMedia(muscicFile);
+            qDebug()<<"add -- > insert:"<<muscicFile;
     });
     connect(playButton, &QPushButton::clicked, [&]() {
         QString file = listWidget->currentItem()->text();
         if(fileName.compare(file)==0){
             if (QMediaPlayer::PausedState == player->state() || QMediaPlayer::StoppedState == player->state()) {
                 player->play();
+            }else {
+                player->stop();
+                player->play();
             }
         } else {
             fileName = file;
             QUrl musicFile = QUrl::fromLocalFile(musicPath + fileName);
-            player->setMedia(musicFile);
             player->setVolume(50);
-            playList->addMedia(musicFile);
+            //查询播放列表是否已添加该音乐
+            QMediaContent newSong(musicFile);
+            for (int i=0; i<playList->mediaCount(); i++) {
+                const QMediaContent& content = playList->media(i);
+                if(content.canonicalUrl()==newSong.canonicalUrl()){
+                    playList->removeMedia(i);
+                    break;
+                }
+            }
+            //停止当前播放的音乐
+            player->stop();
+            playList->insertMedia(0,musicFile);
+            playList->setCurrentIndex(0);
+            //播放选中音乐
             player->play();
         }
     });
@@ -116,12 +145,7 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
             player->pause();
         }
     });
-    //检测音乐播放完毕，自动播放播放列表中的下一首
-    connect(player, &QMediaPlayer::stateChanged, [=](QMediaPlayer::State state) {
-        if (state == QMediaPlayer::StoppedState) {
-            player->play();
-        }
-    });
+
     //默认关闭
     close();
 }
