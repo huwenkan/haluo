@@ -95,33 +95,23 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
             QString fileName = listWidget->currentItem()->text();
             QString filePath = musicPath + fileName;
             QUrl muscicFile = QUrl::fromLocalFile(filePath);
-            QMediaContent newSong(filePath);
+            QMediaContent newSong(muscicFile);
             for (int i=0; i<playList->mediaCount(); i++) {
                 const QMediaContent& content = playList->media(i);
                 if(content.canonicalUrl()==newSong.canonicalUrl()){
                     playList->removeMedia(i);
-                    playList->insertMedia(0,muscicFile);
-
-                    qDebug()<<"remove:"<<muscicFile;
-                    qDebug()<<"add -- > insert:"<<muscicFile;
+                    playList->insertMedia(1,muscicFile);
                     return;
                 }
             }
             playList->addMedia(muscicFile);
-            qDebug()<<"add -- > insert:"<<muscicFile;
     });
     connect(playButton, &QPushButton::clicked, [&]() {
         QString file = listWidget->currentItem()->text();
-        if(fileName.compare(file)==0){
-            if (QMediaPlayer::PausedState == player->state() || QMediaPlayer::StoppedState == player->state()) {
-                player->play();
-            }else {
-                player->stop();
-                player->play();
-            }
+        if (QMediaPlayer::PausedState == player->state()) {
+            player->play();
         } else {
-            fileName = file;
-            QUrl musicFile = QUrl::fromLocalFile(musicPath + fileName);
+            QUrl musicFile = QUrl::fromLocalFile(musicPath + file);
             player->setVolume(50);
             //查询播放列表是否已添加该音乐
             QMediaContent newSong(musicFile);

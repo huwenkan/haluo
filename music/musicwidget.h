@@ -22,8 +22,8 @@ public:
     QString musicPath=QDir::currentPath().append("/music/");
     QMediaPlayer *player;
     QListWidget *listWidget;
-    QString fileName;//当前播放的歌曲
     QMediaPlaylist *playList;
+
 signals:
 
 };
