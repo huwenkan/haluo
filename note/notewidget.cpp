@@ -18,12 +18,18 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     QPushButton *openButton = new QPushButton("打开", this);
     QPushButton *addButton = new QPushButton("新建", this);
     QPushButton *deleteButton = new QPushButton("删除", this);
+    QPushButton *modifyFileNameButton = new QPushButton("修改文件名", this);
     //布局
+    QHBoxLayout *hLayout1 = new QHBoxLayout();
+    hLayout1->addWidget(openButton);
+    hLayout1->addWidget(addButton);
+    QHBoxLayout *hLayout2 = new QHBoxLayout();
+    hLayout2->addWidget(deleteButton);
+    hLayout2->addWidget(modifyFileNameButton);
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(listWidget);
-    layout->addWidget(openButton);
-    layout->addWidget(addButton);
-    layout->addWidget(deleteButton);
+    layout->addLayout(hLayout1);
+    layout->addLayout(hLayout2);
     setLayout(layout);
 
     //新增记事本窗口
@@ -31,14 +37,15 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     addNoteWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
     addNoteWidget->setWindowTitle("请输入文件名");
     addNoteWidget->setWindowIcon(QIcon(":/ico/haluo_blue.ico"));
-    noteNameTextEdit = new QLineEdit(addNoteWidget);
-    noteNameTextEdit->setReadOnly(false);
+    addNoteNameTextEdit = new QLineEdit(addNoteWidget);
+    addNoteNameTextEdit->setReadOnly(false);
     addNoteWidget->resize(350,100);
 
+    //创建新文件&修改文件名
     QPushButton *confirmButton = new QPushButton("确认",addNoteWidget);
     QPushButton *cancelButton = new QPushButton("取消",addNoteWidget);
     connect(confirmButton,&QPushButton::clicked,[&](){
-        QString fileName=noteNameTextEdit->text();
+        QString fileName=addNoteNameTextEdit->text();
         QFile file(notePath+fileName);
         file.open(QIODevice::WriteOnly);
         file.close();
@@ -50,7 +57,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     });
     //设置新增布局
     QVBoxLayout *confirmAndCancerLayout = new QVBoxLayout();
-    confirmAndCancerLayout->addWidget(noteNameTextEdit);
+    confirmAndCancerLayout->addWidget(addNoteNameTextEdit);
     confirmAndCancerLayout->addWidget(confirmButton);
     confirmAndCancerLayout->addWidget(cancelButton);
     addNoteWidget->setLayout(confirmAndCancerLayout);
@@ -63,7 +70,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
         listWidget->addItem(fileItem);
     }
 
-    //创建文本框窗口
+    //创建文本框载体窗口
     openWidget = new QWidget(listWidget);
     openWidget->setStyleSheet("background-image: url(:/background/nengtianshi.jpg);background-position: center;background-repeat: no-repeat;");
     openWidget->setWindowIcon(QIcon(":/ico/haluo_blue.ico"));
@@ -82,8 +89,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     textEdit->close();
 
     textEdit->resize(openWidget->width(),openWidget->height());
-    openWidget->setWindowModality(Qt::WindowModal);
-    openWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
+    openWidget->setWindowFlags(Qt::Window);
     openWidget->resize(500,500);
 
     //设置输入文本框的保存按钮的文本颜色
@@ -92,7 +98,7 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     saveButtonPalette.setColor(QPalette::ButtonText, Qt::white);
     saveButton->setPalette(saveButtonPalette);
 
-    //输入文本款布局
+    //输入文本框布局
     QVBoxLayout *textLayout =new QVBoxLayout();
     textLayout->addWidget(textEdit);
     textLayout->addWidget(saveButton);
@@ -142,7 +148,45 @@ NoteWidget::NoteWidget(QWidget *parent) : QWidget(parent)
     });
 
     connect(addButton,&QPushButton::clicked,[&](){
+        addNoteNameTextEdit->clear();
         addNoteWidget->show();
+    });
+
+    modifyNoteNameWidget = new QWidget(this);
+    modifyNoteNameWidget->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
+    modifyNoteNameWidget->setWindowTitle("请输入文件名");
+    modifyNoteNameWidget->setWindowIcon(QIcon(":/ico/haluo_blue.ico"));
+    modifyNoteNameWidget->resize(350,100);
+    modifyNoteNameTextEdit = new QLineEdit(modifyNoteNameWidget);
+    modifyNoteNameTextEdit->setReadOnly(false);
+
+    QPushButton *ModifyconfirmButton = new QPushButton("确认",modifyNoteNameWidget);
+    QPushButton *ModifycancelButton = new QPushButton("取消",modifyNoteNameWidget);
+    //设置修改文件名窗口布局
+    QVBoxLayout *modifyConfirmAndCancerLayout = new QVBoxLayout();
+    modifyConfirmAndCancerLayout->addWidget(modifyNoteNameTextEdit);
+    modifyConfirmAndCancerLayout->addWidget(ModifyconfirmButton);
+    modifyConfirmAndCancerLayout->addWidget(ModifycancelButton);
+    modifyNoteNameWidget->setLayout(modifyConfirmAndCancerLayout);
+
+    connect(modifyFileNameButton,&QPushButton::clicked,[&](){
+        modifyNoteNameTextEdit->clear();
+        modifyNoteNameWidget->show();
+    });
+    connect(ModifyconfirmButton,&QPushButton::clicked,[&](){
+        if(listWidget->currentItem()!=nullptr){
+            QString fileName =  listWidget->currentItem()->text();
+            QString filePath = notePath + fileName;
+            QFile file(filePath);
+            fileName=modifyNoteNameTextEdit->text();
+            listWidget->currentItem()->setText(fileName);
+            file.rename(notePath+fileName);
+            file.close();
+            modifyNoteNameWidget->close();
+        }
+    });
+    connect(ModifycancelButton,&QPushButton::clicked,[&](){
+        modifyNoteNameWidget->close();
     });
     //默认关闭
     close();

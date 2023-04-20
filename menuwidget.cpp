@@ -57,11 +57,11 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
     button4->setGeometry(100,100,100,100);
     connect(button4, &QPushButton::clicked, app, &QApplication::quit);
     //合体
-    QPushButton *button5 = new QPushButton("合体", label);
+    QPushButton *button5 = new QPushButton("unknown", label);
     button5->setGeometry(0,200,100,100);
     connect(button5, &QPushButton::clicked, app, &QApplication::quit);
     //关闭菜单
-    QPushButton *button6 = new QPushButton("关闭", label);
+    QPushButton *button6 = new QPushButton("unknown", label);
     button6->setGeometry(100,200,100,100);
     connect(button6, &QPushButton::clicked, [](){
         //功能总窗口

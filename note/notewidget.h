@@ -30,7 +30,9 @@ public:
     QString  fileName;
     QPushButton *saveButton;
     QWidget *addNoteWidget;
-    QLineEdit *noteNameTextEdit;
+    QWidget *modifyNoteNameWidget;
+    QLineEdit *addNoteNameTextEdit;
+    QLineEdit *modifyNoteNameTextEdit;
 
 signals:
 
