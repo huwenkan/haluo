@@ -56,30 +56,44 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
     QPushButton *button4 = new QPushButton("退出", label);
     button4->setGeometry(100,100,100,100);
     connect(button4, &QPushButton::clicked, app, &QApplication::quit);
-    //合体
-    QPushButton *button5 = new QPushButton("unknown", label);
+    //宏模式
+    QPushButton *button5 = new QPushButton("开启\\关闭鼠标\n宏模式", label);
     button5->setGeometry(0,200,100,100);
-    connect(button5, &QPushButton::clicked, app, &QApplication::quit);
+    connect(button5, &QPushButton::clicked, [&](){
+        if(!StartThread::ENABLE_MACRO){
+            StartThread::ENABLE_MACRO=true;
+            StartThread::PRESS_X=false;
+        }else {
+            StartThread::ENABLE_MACRO=false;
+            StartThread::PRESS_X=false;
+        }
+        closeAll();
+    });
     //关闭菜单
     QPushButton *button6 = new QPushButton("unknown", label);
     button6->setGeometry(100,200,100,100);
-    connect(button6, &QPushButton::clicked, [](){
-        //功能总窗口
-        menuWidget->menuWidgetFlag = false;
-        menuWidget->close();
-        //皮肤
-        haluoShow->skinWidget->close();
-        menuWidget->skinFlag = false;
-        //音乐
-        musicWidget->close();
-        musicWidget->musicFlag = false;
-        //记事本
-        noteWidget->close();
-        noteWidget->noteFlag = false;
+    connect(button6, &QPushButton::clicked, [&](){
+        closeAll();
     });
 
     this->setGeometry(50,0,200,300);
     this->setStyleSheet("background-color: rgba(0, 255, 0, 0.5);");
     //默认关闭
     close();
+}
+
+//关闭全部窗口
+void MenuWidget::closeAll(){
+    //功能总窗口
+    menuWidget->menuWidgetFlag = false;
+    menuWidget->close();
+    //皮肤
+    haluoShow->skinWidget->close();
+    menuWidget->skinFlag = false;
+    //音乐
+    musicWidget->close();
+    musicWidget->musicFlag = false;
+    //记事本
+    noteWidget->close();
+    noteWidget->noteFlag = false;
 }

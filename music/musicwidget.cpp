@@ -136,6 +136,25 @@ MusicWidget::MusicWidget(QWidget *parent) : QWidget(parent)
         }
     });
 
+//    movie = new QMovie(":/background/call.gif");
+//    QLabel *callLabel = new QLabel();
+//    callLabel->setMovie(movie);
+//    callLabel->resize(400,400);
+//    callLabel->show();
+//    movie->start();
+//    connect(player,&QMediaPlayer::stateChanged,[&](QMediaPlayer::State state){
+//        if(state == QMediaPlayer::PlayingState){
+//            movie->start();  // 开始播放动画
+//        } else {
+//            movie->stop();
+//        }
+//    });
+//    // 监听动画播放完毕的信号
+//    connect(movie,&QMovie::finished,[&](){
+//        qDebug() << "Animation finished";
+//        movie->start();  // 开始播放动画
+//    });
+
     //默认关闭
     close();
 }

@@ -5,6 +5,7 @@ HaluoShow *haluoShow;
 MenuWidget *menuWidget;
 MusicWidget *musicWidget;
 NoteWidget *noteWidget;
+MouseMacroWidget *mouseMacroWidget;
 
 haluo::haluo(QWidget *parent)
     : QWidget(parent)
@@ -28,6 +29,8 @@ haluo::haluo(QWidget *parent)
     //创建记事本窗口
     noteWidget = new NoteWidget(this);
 
+    //鼠标宏窗口
+    mouseMacroWidget = new MouseMacroWidget(this);
 }
 
 haluo::~haluo()

@@ -13,6 +13,7 @@ class MenuWidget : public QWidget
     Q_OBJECT
 public:
     explicit MenuWidget(QWidget *parent = nullptr);
+    void closeAll();
 
     bool skinFlag = false;
     bool menuWidgetFlag = false;

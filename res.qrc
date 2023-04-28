@@ -70,5 +70,6 @@
         <file>background/qnengtianshi.jpg</file>
         <file>ico/haluo.ico</file>
         <file>background/gundahuahai.jpg</file>
+        <file>background/call.gif</file>
     </qresource>
 </RCC>

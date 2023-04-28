@@ -5,6 +5,7 @@
 #include "menuwidget.h"
 #include "music/musicwidget.h"
 #include "note/notewidget.h"
+#include "MouseMacro/mousemacrowidget.h"
 
 #include <QWidget>
 #include <QMouseEvent>
@@ -18,18 +19,21 @@ class HaluoShowLabel;
 class MenuWidget;
 class MusicWidget;
 class NoteWidget;
+class MouseMacroWidget;
+class StartThread;
 
 //用于全局访问来更改状态
 extern HaluoShow *haluoShow;
 extern MenuWidget *menuWidget;
 extern MusicWidget *musicWidget;
 extern NoteWidget *noteWidget;
+extern MouseMacroWidget *mouseMacroWidget;
+
+extern QApplication *app;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class haluo; }
 QT_END_NAMESPACE
-
-extern QApplication *app;
 
 class haluo : public QWidget
 {

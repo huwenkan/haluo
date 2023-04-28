@@ -1,6 +1,8 @@
 #ifndef MUSICWIDGET_H
 #define MUSICWIDGET_H
 
+#include "haluoshow.h"
+
 #include <QWidget>
 #include <QListWidget>
 #include <QPushButton>
@@ -11,6 +13,7 @@
 #include <QAudioFormat>
 #include <QLabel>
 #include <QMediaPlaylist>
+#include <QMovie>
 
 class MusicWidget : public QWidget
 {
@@ -23,6 +26,7 @@ public:
     QMediaPlayer *player;
     QListWidget *listWidget;
     QMediaPlaylist *playList;
+    QMovie *movie;
 
 signals:
 
