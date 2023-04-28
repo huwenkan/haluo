@@ -1,12 +1,14 @@
 #include "mousemacrowidget.h"
 
 #include <QDebug>
+
+bool MouseMacroWidget::ENABLE_MACRO = false;
+
 MouseMacroWidget::MouseMacroWidget(QWidget *parent) : QWidget(parent)
 {
-    startThread = new StartThread();
-    controllerThread = new ControllerThread();
     keyControllerThread = new KeyControllerThread();
-    startThread->start();
-    controllerThread->start();
+    clickThread = new ClickThread();
     keyControllerThread->start();
+    clickThread->start();
+    KeyControllerThread::mtx->lock();
 }

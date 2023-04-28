@@ -1,13 +1,14 @@
 #ifndef MOUSEMACROWIDGET_H
 #define MOUSEMACROWIDGET_H
 
-#include "startthread.h"
-#include "controllerthread.h"
 #include "keycontrollerthread.h"
+#include "clickthread.h"
 
 #include <QWidget>
-#include <QKeyEvent>
 #include <Windows.h>
+
+class KeyControllerThread;
+class ClickThread;
 
 class MouseMacroWidget : public QWidget
 {
@@ -15,9 +16,9 @@ class MouseMacroWidget : public QWidget
 public:
     explicit MouseMacroWidget(QWidget *parent = nullptr);
 
-    StartThread *startThread;
-    ControllerThread *controllerThread;
+    static bool ENABLE_MACRO;
     KeyControllerThread *keyControllerThread;
+    ClickThread *clickThread;
 
 signals:
 

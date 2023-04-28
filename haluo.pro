@@ -10,10 +10,9 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    MouseMacro/controllerthread.cpp \
+    MouseMacro/clickthread.cpp \
     MouseMacro/keycontrollerthread.cpp \
     MouseMacro/mousemacrowidget.cpp \
-    MouseMacro/startthread.cpp \
     haluoshow.cpp \
     haluoshowlabel.cpp \
     main.cpp \
@@ -23,10 +22,9 @@ SOURCES += \
     note/notewidget.cpp
 
 HEADERS += \
-    MouseMacro/controllerthread.h \
+    MouseMacro/clickthread.h \
     MouseMacro/keycontrollerthread.h \
     MouseMacro/mousemacrowidget.h \
-    MouseMacro/startthread.h \
     haluo.h \
     haluoshow.h \
     haluoshowlabel.h \

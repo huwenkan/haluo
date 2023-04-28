@@ -1,5 +1,10 @@
 #include "keycontrollerthread.h"
 
+#include <QDebug>
+
+bool KeyControllerThread::PRESS_X=false;
+mutex *KeyControllerThread::mtx=new mutex();
+
 KeyControllerThread::KeyControllerThread()
 {
 
@@ -22,20 +27,17 @@ LRESULT CALLBACK KeyControllerThread::KeyProc(int nCode, WPARAM wParam, LPARAM l
     {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
     }
+
     //检测按下的按键是否要开启宏功能
-    if (nCode == HC_ACTION && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN))
+    if (nCode == HC_ACTION && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) && MouseMacroWidget::ENABLE_MACRO)
     {
         KBDLLHOOKSTRUCT* p = reinterpret_cast<KBDLLHOOKSTRUCT*>(lParam);
         wchar_t keyName[256];
         if (GetKeyNameTextW(p->scanCode << 16, keyName, 256))
         {
             QString name = QString::fromWCharArray(keyName);
-            if(name.compare("X")==0 && !StartThread::PRESS_X){
-                qDebug()<<"按下X";
-                StartThread::PRESS_X = true;
-            } else if(name.compare("X")==0 && StartThread::PRESS_X){
-                StartThread::PRESS_X = false;
-                qDebug()<<"再次按下X";
+            if(name.compare("X")==0){
+                KeyControllerThread::mtx->unlock();
             }
         }
     }

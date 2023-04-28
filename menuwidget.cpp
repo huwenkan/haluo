@@ -60,12 +60,10 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
     QPushButton *button5 = new QPushButton("开启\\关闭鼠标\n宏模式", label);
     button5->setGeometry(0,200,100,100);
     connect(button5, &QPushButton::clicked, [&](){
-        if(!StartThread::ENABLE_MACRO){
-            StartThread::ENABLE_MACRO=true;
-            StartThread::PRESS_X=false;
+        if(!MouseMacroWidget::ENABLE_MACRO){
+            MouseMacroWidget::ENABLE_MACRO=true;
         }else {
-            StartThread::ENABLE_MACRO=false;
-            StartThread::PRESS_X=false;
+            MouseMacroWidget::ENABLE_MACRO=false;
         }
         closeAll();
     });
