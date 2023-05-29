@@ -11,4 +11,4 @@
 
 鼠标右键打开菜单功能：
 
-![QQ图片20230415161703](https://user-images.githubusercontent.com/90967406/232200113-661991cc-7125-4cdc-9e28-7799a2bae77e.png)
+![QQ图片20230507164455](https://user-images.githubusercontent.com/90967406/236667421-efd1a8a0-a90d-4f61-9066-5130ef2ac2d5.png)
