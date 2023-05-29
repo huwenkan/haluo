@@ -6,7 +6,7 @@ MenuWidget::MenuWidget(QWidget *parent) : QWidget(parent)
     QLabel *label = new QLabel(this);
     label->setFixedSize(200,300);
     label->show();
-
+    //记事本
     QPushButton *button1 = new QPushButton("记事本", label);
     button1->setGeometry(0,0,100,100);
     connect(button1,&QPushButton::clicked,[&](){
